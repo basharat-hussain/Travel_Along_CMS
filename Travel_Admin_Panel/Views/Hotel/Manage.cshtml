@@ -1,0 +1,215 @@
+﻿@{
+    ViewBag.Title = "ViewHotels";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+
+    List<SelectListItem> LstCategory = new List<SelectListItem>();
+    LstCategory.Add(new SelectListItem() { Value = "Budget", Text = "Budget" });
+    LstCategory.Add(new SelectListItem() { Value = "Standard", Text = "Standard" });
+    LstCategory.Add(new SelectListItem() { Value = "Deluxe", Text = "Deluxe" });
+}
+@using System.Data;
+
+@model Travel_Admin_Panel.Models.CombinedHotelModel
+
+
+<div class="modal fade modal-image" id="modal-image" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+            </div>
+            <div class="modal-body">
+                <img src="" alt="picture 1" class="img-responsive">
+            </div>
+            <div class="modal-footer">
+                <p>Hotel</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " id="modal-edit-hotel" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content">
+            <form id="hoteleditform" method="post" enctype="multipart/form-data">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                    <h4 class="modal-title"><strong>Edit</strong> Hotel</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="alert alert-danger display-hide" id="errLbl">
+                                <span></span>
+                            </div>
+                            @{
+                                List<SelectListItem> LstLocations = Model.LocationList;
+                            }
+
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    @Html.HiddenFor(m => m.Htl.ID)
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label class="control-label"> Choose Location</label>
+                                                <div class="append-icon">
+                                                    @Html.DropDownListFor(m => m.Htl.LocationID, LstLocations, "Select Location", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label class="control-label">Name</label>
+                                                <div class="append-icon">
+                                                    @Html.TextBoxFor(m => m.Htl.Name, new { @class = "form-control", @placeholder = "Name", @type = "text" })
+                                                    <i class="fa fa-info"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label class="control-label">Hotel Image (W:850px H:550px)</label>
+                                                <div class="file">
+                                                    <div class="option-group">
+                                                        <span class="file-button btn-primary">Choose File</span>
+                                                        @Html.TextBoxFor(m => m.Htl.HotelImage, new { @class = "custom-file", @onchange = "document.getElementById('uploader').value=this.value;", @type = "file", @accept = "image/jpeg" })
+                                                        <input type="text" class="form-control" id="uploader" placeholder="no file selected" readonly="">
+                                                        @Html.HiddenFor(m => m.Htl.ImageLink)
+                                                        @Html.HiddenFor(m => m.Htl.ThumbLink)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Address</label>
+                                                <div class="append-icon">
+                                                    @Html.TextBoxFor(m => m.Htl.Address, new { @class = "form-control", @placeholder = "Address", @type = "text" })
+                                                    <i class="fa fa-map-marker"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Category</label>
+                                                <div class="append-icon">
+                                                    @Html.DropDownListFor(m => m.Htl.HotelCategory, LstCategory, "Select Category", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Hotel Description</label>
+                                                <div class="append-icon">
+                                                    @Html.TextAreaFor(m => m.Htl.Description, new { @class = "form-control", @placeholder = "Enter hotel details", @rows = "6", @maxlength = "4000" })
+                                                    <i class="icon-lock"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Hotel Features (seperated by semicolons(;)</label>
+                                                <div class="append-icon">
+                                                    @Html.TextAreaFor(m => m.Htl.Features, new { @class = "form-control", @placeholder = "Enter hotel features", @rows = "6", @maxlength = "4000" })
+                                                    <i class="icon-lock"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-embossed">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal-view-hotel" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>View</strong> hotel</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4><strong><i class="fa fa-tags"></i>&nbsp;Location: </strong><span class="location">NA</span></h4>
+                    </div>
+                    <div class="col-md-6">
+                        <h4><strong><i class="fa fa-image"></i>&nbsp;Hotel Name: </strong><span class="htl-name">NA</span></h4>
+
+                    </div>
+                    <div class="col-md-6">
+                        <h4><strong><i class="fa fa-image"></i>&nbsp;Hotel Address: </strong><span class="htl-address">NA</span></h4>
+
+                    </div>
+                    <div class="col-md-6">
+                        <h4><strong><i class="fa fa-image"></i>&nbsp;Hotel Category: </strong><span class="htl-category">NA</span></h4>
+
+                    </div>
+                    <div class="col-md-12">
+                        <h4><strong><i class="fa fa-image"></i>&nbsp;Hotel Features: </strong><span class="htl-features">NA</span></h4>
+
+                    </div>
+                    <div class="col-md-12">
+                        <h4 class="m-b-0 m-t-20"><strong><i class="fa fa-edit"></i>&nbsp;Description: </strong></h4>
+                        <div class="desc-div">
+                            <i class="fa fa-quote-left"></i>
+                            <span class="htl-description">NA</span>
+                            <i class="fa fa-quote-right"></i>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="header">
+        <h2><strong><i class="fa fa-image"></i>@ViewBag.Title</strong></h2>
+        <div class="breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#">Hotel</a>
+                </li>
+                <li class="active">@ViewBag.Title</li>
+            </ol>
+        </div>
+    </div>
+
+
+    <div class="row" id="hotellist">
+        @{Html.RenderPartial("HotelTable", Model.DT);}
+
+    </div>
+
+</div>
+<script>
+    changeActive(5);
+</script>
+<script src="~/Resources/assets/customjs/managehotel.js"></script>

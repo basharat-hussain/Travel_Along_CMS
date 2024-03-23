@@ -1,0 +1,138 @@
+﻿@{
+
+    ViewBag.Title = "ViewTransport";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+    @using System.Data;
+    
+    @model Travel_Admin_Panel.Models.CombinedTransportModel
+
+    <div class="modal fade modal-image" id="modal-image" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                </div>
+                <div class="modal-body">
+                    <img src="" alt="picture 1" class="img-responsive">
+                </div>
+                <div class="modal-footer">
+                    <p>Transport</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div class="modal fade" id="modal-edit-transport" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>Edit</strong> Transport</h4>
+            </div>
+            <form id="transporteditform" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger display-hide" id="errLbl">
+                                <span></span>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    @Html.HiddenFor(m => m.Tport.ID)
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Name</label>
+                                                <div class="append-icon">
+                                                    @Html.TextBoxFor(m => m.Tport.Name, new { @class = "form-control", @placeholder = "Name", @type = "text" })
+                                                    <i class="fa fa-image"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Location Image (W:300px H:190px)</label>
+                                                <div class="file">
+                                                    <div class="option-group">
+                                                        <span class="file-button btn-primary">Choose File</span>
+                                                        @Html.TextBoxFor(m => m.Tport.TransportImage, new { @class = "custom-file", @onchange = "document.getElementById('uploader').value=this.value;", @type = "file", @accept = "image/jpeg" })
+                                                        <input type="text" class="form-control" id="uploader" placeholder="no file selected" readonly="">
+                                                        @Html.HiddenFor(m => m.Tport.ImageLink)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Rate</label>
+                                                <div class="append-icon">
+                                                    @Html.TextBoxFor(m => m.Tport.Rate, new { @class = "form-control", @placeholder = "Rate", @type = "number" })
+                                                    <i class="fa fa-image"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Features(Separated by semicolon)</label>
+                                                    <div class="append-icon">
+                                                        @Html.TextAreaFor(m => m.Tport.Features, new { @class = "form-control", @placeholder = "Enter Features(Seperated by semicolon)", @rows = "6", @maxlength = "4000" })
+                                                        <i class="icon-lock"></i>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-embossed">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <div class="header">
+        <h2><strong><i class="fa fa-image"></i>@ViewBag.Title</strong></h2>
+        <div class="breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#">Transport</a>
+                </li>
+                <li class="active">@ViewBag.Title</li>
+            </ol>
+        </div>
+    </div>
+
+
+    <div class="row" id="transportlist">
+        @{Html.RenderPartial("TransportTable", Model.DT);}
+
+    </div>
+
+</div>
+<script>
+    changeActive(7);
+</script>
+<script src="~/Resources/assets/customjs/managetransport.js"></script>

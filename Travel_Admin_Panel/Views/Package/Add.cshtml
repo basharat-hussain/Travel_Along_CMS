@@ -1,0 +1,144 @@
+﻿@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    List<SelectListItem> LstPackageDuration = new List<SelectListItem>();
+    LstPackageDuration.Add(new SelectListItem { Text = "2Nights 3Days", Value = "2Nights 3Days" });
+    LstPackageDuration.Add(new SelectListItem { Text = "3Nights 4Days", Value = "3Nights 4Days" });
+    LstPackageDuration.Add(new SelectListItem { Text = "4Nights 5Days", Value = "4Nights 5Days" });
+    LstPackageDuration.Add(new SelectListItem { Text = "5Nights 6Days", Value = "5Nights 6Days" });
+    LstPackageDuration.Add(new SelectListItem { Text = "6Nights 7Days", Value = "6Nights 7Days" });
+    LstPackageDuration.Add(new SelectListItem { Text = "7Nights 8Days", Value = "7Nights 8Days" });
+    LstPackageDuration.Add(new SelectListItem { Text = "8Nights 9Days", Value = "8Nights 9Days" });
+    LstPackageDuration.Add(new SelectListItem { Text = "9Nights 10Days", Value = "9Nights 10Days" });
+    LstPackageDuration.Add(new SelectListItem { Text = "10Nights 11Days", Value = "10Nights 11Days" });
+    LstPackageDuration.Add(new SelectListItem { Text = "11Nights 12Days", Value = "11Nights 12Days" });
+    LstPackageDuration.Add(new SelectListItem { Text = "12Nights 13Days", Value = "12Nights 13Days" });
+    LstPackageDuration.Add(new SelectListItem { Text = "13Nights 14Days", Value = "13Nights 14Days" });
+}
+
+<div>
+    <div class="header">
+        <h2><strong><i class="fa fa-image"></i>@ViewBag.Title</strong></h2>
+        <div class="breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#">Package</a>
+                </li>
+                <li class="active">@ViewBag.Title</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default no-bd">
+                <div class="panel-header bg-dark">
+                    <h2 class="panel-title"><strong><i class="fa fa-plus"></i>Add</strong> Package</h2>
+                </div>
+                <div class="panel-body bg-white">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="alert alert-danger display-hide" id="errLbl">
+                                <span></span>
+                            </div>
+                            @model Travel_Admin_Panel.Models.CombinedPackageModel
+                            @{
+                                List<SelectListItem> LstLocations = Model.LocationList;
+                            }
+                            <form id="packagecreateform" method="post" enctype="multipart/form-data">
+                                <div class="row">
+                                    @Html.Hidden("DayCount")
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Choose Location</label>
+                                            @Html.DropDownListFor(m => m.Pkg.LocationID, LstLocations, "Select Location", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Title</label>
+                                            <div class="append-icon">
+                                                @Html.TextBoxFor(m => m.Pkg.Title, new { @class = "form-control", @placeholder = "Title", @type = "text" })
+                                                <i class="fa fa-image"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Choose Package Duration</label>
+                                            @Html.DropDownListFor(m => m.Pkg.Duration, LstPackageDuration, "Select Duration", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Package Image (W:850px H:550px)</label>
+                                            <div class="file">
+                                                <div class="option-group">
+                                                    <span class="file-button btn-primary">Choose File</span>
+                                                    @Html.TextBoxFor(m => m.Pkg.PackageImage, new { @class = "custom-file", @onchange = "document.getElementById('uploader').value=this.value;", @type = "file", @accept = "image/jpeg" })
+                                                    <input type="text" class="form-control" id="uploader" placeholder="no file selected" readonly="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Rate</label>
+                                            <div class="append-icon">
+                                                @Html.TextBoxFor(m => m.Pkg.Rate, new { @class = "form-control", @placeholder = "Rate", @type = "text" })
+                                                <i class="fa fa-rupee"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" id="package-fields">
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Package Description</label>
+                                            <div class="append-icon">
+                                                @Html.TextAreaFor(m => m.Pkg.Description, new { @class = "form-control", @placeholder = "Enter Package Description", @rows = "6", @maxlength = "8000" })
+                                                <i class="fa fa-edit"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Package Inclusions [seperated by semi-colon (;)]</label>
+                                            <div class="append-icon">
+                                                @Html.TextAreaFor(m => m.Pkg.Inclusions, new { @class = "form-control", @placeholder = "Enter Package Inclusions seperated by semi-colon (;)", @rows = "6", @maxlength = "8000" })
+                                                <i class="fa fa-check"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Package Exclusions [seperated by semi-colon (;)]</label>
+                                            <div class="append-icon">
+                                                @Html.TextAreaFor(m => m.Pkg.Exclusions, new { @class = "form-control", @placeholder = "Enter package exclusions seperated by semi-colon(;)", @rows = "6", @maxlength = "8000" })
+                                                <i class="fa fa-times"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-center m-t-20">
+                                    <button type="submit" id="btnadddestination" class="btn btn-embossed btn-primary"><i class="fa fa-plus"></i>&nbsp;Add</button>
+                                    <button type="reset" class="cancel btn btn-embossed btn-default m-b-10 m-r-0">Reset</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    changeActive(4);
+</script>
+<script src="~/Resources/assets/customjs/addpackage.js"></script>

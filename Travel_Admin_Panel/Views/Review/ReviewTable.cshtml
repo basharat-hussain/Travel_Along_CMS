@@ -1,0 +1,101 @@
+﻿@using System.Data;
+@model DataTable
+<div class="col-md-12 portlets">
+    <div class="panel">
+        <div class="panel-header panel-controls">
+            <h3><i class="fa fa-table"></i> <strong>Reviews</strong></h3>
+            @if (ViewBag.Tran != null && ViewBag.Msg != null)
+            {
+                if (ViewBag.Tran == "True")
+                {
+                    <div class="alert alert-success" id="errLbl">
+                        <span>@ViewBag.Msg</span>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-danger" id="errLbl">
+                        <span>@ViewBag.Msg</span>
+                    </div>
+                }
+
+            }
+            <div class="control-btn">
+                <a data-ajax="true" id="btnupdatereviewlist" data-ajax-method="POST" data-ajax-loading="#tblLoader" data-ajax-mode="replace" data-ajax-update="#reviewlist" href="/review/ViewReviewsAjax"><i class="icon-reload"></i></a>
+                <a href="#" class="panel-maximize hidden"><i class="icon-size-fullscreen"></i></a>
+            </div>
+            <div class="panel-content">
+                @if (Model.Rows.Count > 0)
+                {
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Title</th>
+                                <th>Rating</th>
+                                <th>Status</th>
+                                <th>Controls</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int x = 1;}
+                            @foreach (DataRow row in Model.Rows)
+                            {
+
+                            <tr>
+                                <td>@(x++)</td>
+                                <td>@row["Reviewer"]</td>
+                                <td>@row["ReviewTitle"]</td>
+                                <td>
+                                    @{
+                                        int Rating = Convert.ToInt32(row["Rating"]);
+                                    }
+                                    @for (int i = 1; i <= Rating; i++)
+                                    {
+                                        <i class="fa fa-star"></i>
+                                    }
+                                    @for (int i = Rating; i < 5; i++)
+                                    {
+                                        <i class="fa fa-star-o"></i>
+                                    }
+                                </td>
+                                @{
+                                    Boolean Status = Convert.ToBoolean(@row["Status"]);
+                                    String St = Status ? "Approved" : "Unapproved";
+                                }
+                                <td>
+                                    @St
+                                </td>
+                                <td>
+
+                                    <a class="btnviewreview btn btn-sm btn-default" href="javascript:;" title="View Review" data-name="@row["Reviewer"]" data-title="@row["ReviewTitle"]" data-address="@row["Address"]" data-description="@row["ReviewDescription"]" data-rating="@row["Rating"]"><i class="fa fa-search"></i></a>
+
+                                    @if (Status)
+                                    {
+                                        <a class="delete btn btn-sm btn-danger" title="Unapprove" data-ajax="true" data-ajax-loading="#tblLoader" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#reviewlist" href="/Review/Approval?ID=@row["ReviewID"]&Status=@row["Status"].ToString()">Unapprove</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="delete btn btn-sm btn-success" title="Approve" data-ajax="true" data-ajax-loading="#tblLoader" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#reviewlist" href="/Review/Approval?ID=@row["ReviewID"]&Status=@row["Status"].ToString()">Approve</a>
+                                    }
+
+
+                                </td>
+                            </tr>
+                            }
+
+
+
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <h5>No review Found</h5>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

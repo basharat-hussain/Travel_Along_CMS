@@ -1,0 +1,93 @@
+﻿@using System.Data;
+@model DataTable
+<div class="col-md-12 portlets">
+    <div class="panel">
+        <div class="panel-header panel-controls">
+            <h3><i class="fa fa-table"></i> <strong>Activities</strong></h3>
+            @if (ViewBag.Tran != null && ViewBag.Msg != null)
+            {
+                if (ViewBag.Tran == "True")
+                {
+                    <div class="alert alert-success" id="errLbl">
+                        <span>@ViewBag.Msg</span>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-danger" id="errLbl">
+                        <span>@ViewBag.Msg</span>
+                    </div>
+                }
+
+            }
+            <div class="control-btn">
+                <a data-ajax="true" id="btnupdateactvtylist" data-ajax-method="POST" data-ajax-loading="#tblLoader" data-ajax-mode="replace" data-ajax-update="#activitylist" href="/activity/ViewActivitiesAjax"><i class="icon-reload"></i></a>
+                <a href="#" class="panel-maximize hidden"><i class="icon-size-fullscreen"></i></a>
+            </div>
+            <div class="panel-content">
+                @if (Model.Rows.Count > 0)
+                {
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr> 
+                                <th>#</th>
+                                <th>Location</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Image</th>
+                                <th>Controls</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int x = 1;}
+                            @foreach (DataRow row in Model.Rows)
+                            {
+
+                                <tr>
+                                    <td>@(x++)</td>
+                                    <td>@row["Location"]</td>
+                                    <td>@row["ActivityName"]</td>
+                                    <td>
+                                        @if (@row["ActivityDescription"].ToString().Length > 50)
+                                        {
+                                            @row["ActivityDescription"].ToString().Substring(0, 50)
+
+                                        }
+                                        else
+                                        {
+                                            @row["ActivityDescription"]
+                                        }...
+                                    </td>
+                                    <td>
+                                        @{
+                                            string ImageLink = row["ImageLink"].ToString();
+                                           // ImageLink = ImageLink.Substring(ImageLink.IndexOf("\\Resources"));
+
+                                        }
+
+                                        <a class="btnimage btn btn-sm btn-default" data-image="@ImageLink" title="View Image" data-title="@row["ActivityName"]"><i class="fa fa-image"></i>&nbsp;View</a>
+
+                                    </td>
+                                    <td>
+                                        <a class="btnviewactvty btn btn-sm btn-default" href="javascript:;" title="View Activity" data-title="@row["ActivityName"]" data-location="@row["Location"]" data-description="@row["ActivityDescription"]"><i class="fa fa-search"></i></a>
+
+                                        <a class="btnviewactvtyed btn btn-sm btn-default" href="javascript:;" title="Edit Activity" data-title="@row["ActivityName"]" data-location="@row["Location"]" data-description="@row["ActivityDescription"]" data-image="@row["ImageLink"]" data-locationid="@row["LocationID"]" data-id="@row["ActivityID"]"><i class="icon-note"></i></a>
+                                        <a class="delete btn btn-sm btn-danger" title="Delte Activity" data-ajax="true" data-ajax-confirm="Are you sure you want to delete the Activity?" data-ajax-loading="#tblLoader" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#activitylist" href="/Activity/Delete?ID=@row["ActivityID"]&ImageUrl=@row["ImageLink"]"><i class="icons-office-52"></i></a>
+                                    </td>
+                                </tr>
+                            }
+
+
+
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <h5>No Activity Found</h5>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

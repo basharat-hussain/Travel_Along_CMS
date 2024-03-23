@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Manage";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+@using System.Data;
+
+@model Travel_Admin_Panel.Models.CombinedPackageModel
+
+
+<div class="modal fade modal-image" id="modal-image" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+            </div>
+            <div class="modal-body">
+                <img src="" alt="picture 1" class="img-responsive">
+            </div>
+            <div class="modal-footer">
+                <p>Package</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " id="modal-edit-package" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>Edit</strong> Package</h4>
+            </div>
+            <div id="package-edit-view">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal-view-package" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>View</strong> Package</h4>
+            </div>
+            <div class="modal-body" id="package-view">
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="header">
+        <h2><strong><i class="fa fa-image"></i>@ViewBag.Title</strong></h2>
+        <div class="breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#">Package</a>
+                </li>
+                <li class="active">@ViewBag.Title</li>
+            </ol>
+        </div>
+    </div>
+
+
+    <div class="row" id="packagelist">
+        @{Html.RenderPartial("PackageTable", Model.DT);}
+
+    </div>
+
+</div>
+<script>
+        changeActive(4);
+</script>
+<script src="~/Resources/assets/customjs/managepackages.js"></script>

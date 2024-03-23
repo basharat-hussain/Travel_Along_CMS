@@ -1,0 +1,72 @@
+﻿@using System.Data
+@model  DataTable
+@{
+    ViewBag.Title = "Manage";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div class="modal fade" id="modal-view-review" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>View</strong> Review</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <h4><strong><i class="fa fa-tags"></i>&nbsp;Reviewer Name: </strong><span class="rev-name">NA</span></h4>
+                    </div>
+                    <div class="col-md-7">
+                        <h4><strong><i class="fa fa-image"></i>&nbsp;Review Title: </strong><span class="rev-title">NA</span></h4>
+                    </div>
+                    <div class="col-md-5">
+                        <h4><strong><i class="fa fa-tags"></i>&nbsp;Reviewer Address: </strong><span class="rev-address">NA</span></h4>
+                    </div>
+                    <div class="col-md-7">
+                        <h4><strong><i class="fa fa-tags"></i>&nbsp;Reviewer Rating: </strong><span class="rev-rating">NA</span></h4>
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <h4 class="m-b-0 m-t-20"><strong><i class="fa fa-edit"></i>&nbsp; Review Description </strong></h4>
+                        <div class="desc-div">
+                            <i class="fa fa-quote-left"></i>
+                            <span class="rev-description">NA</span>
+                            <i class="fa fa-quote-right"></i>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="header">
+        <h2><strong><i class="fa fa-image"></i>@ViewBag.Title</strong></h2>
+        <div class="breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#">Review</a>
+                </li>
+                <li class="active">@ViewBag.Title</li>
+            </ol>
+        </div>
+    </div>
+
+
+    <div class="row" id="reviewlist">
+        @{Html.RenderPartial("ReviewTable", Model);}
+
+    </div>
+
+</div>
+<script>
+    changeActive(8);
+</script>
+<script src="~/Resources/assets/customjs/managereview.js"></script>
+

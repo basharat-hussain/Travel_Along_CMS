@@ -1,0 +1,128 @@
+﻿@using Travel_Admin_Panel.Models
+@using System.Data
+@model CombinedPackageModel
+@{
+    DataTable TblPackage = Model.DS.Tables[0];
+    DataTable TblPackageDays = Model.DS.Tables[1];
+}
+
+
+<form id="packageeditform" method="post" enctype="multipart/form-data">
+    <div class="modal-body">
+        <div class="row">
+            @if (TblPackage.Rows.Count > 0)
+            {
+
+                DataRow PackageRow = TblPackage.Rows[0];
+                List<SelectListItem> LstLocations = Model.LocationList;
+
+                <div class="col-md-12">
+                    <div class="alert alert-danger display-hide" id="errLbl">
+                        <span></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            @Html.HiddenFor(m => m.Pkg.ID)
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="control-label"> Choose Location</label>
+                                        <div class="append-icon">
+                                            @Html.DropDownListFor(m => m.Pkg.LocationID, LstLocations, "Select Location", new { @class = "form-control", @Value = PackageRow["LocationID"] })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="control-label"> Package Title</label>
+                                        <div class="append-icon">
+
+                                            @Html.TextBoxFor(m => m.Pkg.Title, new { @class = "form-control", @placeholder = "Name", @type = "text", @Value = PackageRow["PackageTitle"] })
+                                            <i class="fa fa-info"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Package Image (W:300px ; H:260px)</label>
+                                        <div class="file">
+                                            <div class="option-group">
+                                                <span class="file-button btn-primary">Choose File</span>
+                                                @Html.TextBoxFor(m => m.Pkg.PackageImage, new { @class = "custom-file", @onchange = "document.getElementById('uploader').value=this.value;", @type = "file", @accept = "image/jpeg", @Value = PackageRow["ImageLink"] })
+                                                <input type="text" class="form-control" id="uploader" placeholder="no file selected" readonly="">
+                                                @Html.HiddenFor(m => m.Pkg.ImageLink)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Rate</label>
+                                        <div class="append-icon">
+                                            @Html.TextBoxFor(m => m.Pkg.Rate, new { @class = "form-control", @placeholder = "Title", @type = "text", @Value = PackageRow["PackageRate"] })
+                                            <i class="fa fa-rupee"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="control-label">Duration</label>
+                                    <div class="append-icon">
+
+                                        @Html.TextBoxFor(m => m.Pkg.Duration, new { @class = "form-control", @placeholder = "Name", @type = "text", @Value = PackageRow["PackageDuration"], @readonly = "readonly" })
+                                        <i class="fa fa-info"></i>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="row">
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Package Description</label>
+                                        <div class="append-icon">
+                                            @*@Html.TextAreaFor(m => m.Pkg.Description, new { @class = "form-control", @placeholder = "Enter Package details", @rows = "6", @maxlength = "4000", value = PackageRow["PackageDescription"] })*@
+
+                                            <textarea class="form-control" cols="20" id="Pkg_Description" maxlength="4000" name="Pkg.Description" placeholder="Enter Package details" rows="6" >@PackageRow["PackageDescription"]</textarea>
+
+                                            <i class="fa fa-edit"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Package Inclusions [seperated by semi-colon (;)]</label>
+                                        <div class="append-icon">
+                                            @Html.TextAreaFor(m => m.Pkg.Inclusions, new { @class = "form-control", @placeholder = "Enter Package Inclusions seperated by semi-colon (;)", @rows = "6", @maxlength = "8000", @Value = PackageRow["PackageInclusions"] })
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Package Exclusions [seperated by semi-colon (;)]</label>
+                                        <div class="append-icon">
+                                            @Html.TextAreaFor(m => m.Pkg.Exclusions, new { @class = "form-control", @placeholder = "Enter package exclusions seperated by semi-colon(;)", @rows = "6", @maxlength = "8000", @Value = PackageRow["PackageExclusions"] })
+                                            <i class="fa fa-times"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary btn-embossed">Save changes</button>
+    </div>
+</form>

@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div>
+    <div class="header">
+        <h2><strong><i class="fa fa-image"></i>@ViewBag.Title</strong></h2>
+        <div class="breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#">Activities</a>
+                </li>
+                <li class="active">@ViewBag.Title</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="panel panel-default no-bd">
+                <div class="panel-header bg-dark">
+                    <h2 class="panel-title"><strong><i class="fa fa-plus"></i>Add</strong> Activity</h2>
+                </div>
+                <div class="panel-body bg-white">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="alert alert-danger display-hide" id="errLbl">
+                                <span></span>
+                            </div>
+                            @model Travel_Admin_Panel.Models.CombinedActivityModel
+                            @{
+                                List<SelectListItem> LstLocations = Model.LocationList;
+                            }
+                            <form id="activitycreateform" method="post" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Choose Location</label>
+                                            @Html.DropDownListFor(m => m.Actvty.LocationID, LstLocations, "Select Location", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Title</label>
+                                            <div class="append-icon">
+                                                @Html.TextBoxFor(m => m.Actvty.Title, new { @class = "form-control", @placeholder = "Name", @type = "text" })
+                                                <i class="fa fa-image"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Activity Image (W:350px H:250px)</label>
+                                            <div class="file">
+                                                <div class="option-group">
+                                                    <span class="file-button btn-primary">Choose File</span>
+                                                    @Html.TextBoxFor(m => m.Actvty.ActivityImage, new { @class = "custom-file", @onchange = "document.getElementById('uploader').value=this.value;", @type = "file", @accept = "image/jpeg" })
+                                                    <input type="text" class="form-control" id="uploader" placeholder="no file selected" readonly="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+
+                                    <div class="form-group">
+                                        <label class="control-label">Activity Description</label>
+                                        <div class="append-icon">
+                                            @Html.TextAreaFor(m => m.Actvty.Description, new { @class = "form-control", @placeholder = "Enter Activity description", @rows = "6", @maxlength = "4000" })
+                                            <i class="icon-lock"></i>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="text-center m-t-20">
+                                    <button type="submit" id="btnaddactivity" class="btn btn-embossed btn-primary"><i class="fa fa-plus"></i>&nbsp;Add</button>
+                                    <button type="reset" class="cancel btn btn-embossed btn-default m-b-10 m-r-0">Reset</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    changeActive(6);
+</script>
+<script src="~/Resources/assets/customjs/addactivity.js"></script>

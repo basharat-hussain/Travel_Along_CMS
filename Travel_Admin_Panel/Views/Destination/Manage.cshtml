@@ -1,0 +1,171 @@
+﻿@{
+
+     ViewBag.Title = "ViewDestinations";
+     Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+    @using System.Data;
+
+    @model Travel_Admin_Panel.Models.CombinedDestinationModel
+
+
+    <div class="modal fade modal-image" id="modal-image" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                </div>
+                <div class="modal-body">
+                    <img src="" alt="picture 1" class="img-responsive">
+                </div>
+                <div class="modal-footer">
+                    <p>Destination</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+        <div class="modal fade " id="modal-edit-destination" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                        <h4 class="modal-title"><strong>Edit</strong> Destination</h4>
+                    </div>
+                    <form id="destinationeditform" method="post" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="alert alert-danger display-hide" id="errLbl">
+                                        <span></span>
+                                    </div>
+                                    @{
+                                        List<SelectListItem> LstLocations = Model.LocationList;
+                                    }
+
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            @Html.HiddenFor(m => m.Dest.ID)
+
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label class="control-label"> Choose Location</label>
+                                                        <div class="append-icon">
+                                                            @Html.DropDownListFor(m => m.Dest.LocationID, LstLocations, "Select Location", new { @class = "form-control" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Name</label>
+                                                        <div class="append-icon">
+                                                            @Html.TextBoxFor(m => m.Dest.Name, new { @class = "form-control", @placeholder = "Name", @type = "text" })
+                                                            <i class="fa fa-info"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Destination Image (W:850px ; H:550px)</label>
+                                                        <div class="file">
+                                                            <div class="option-group">
+                                                                <span class="file-button btn-primary">Choose File</span>
+                                                                @Html.TextBoxFor(m => m.Dest.DestinationImage, new { @class = "custom-file", @onchange = "document.getElementById('uploader').value=this.value;", @type = "file", @accept = "image/jpeg" })
+                                                                <input type="text" class="form-control" id="uploader" placeholder="no file selected" readonly="">
+                                                                @Html.HiddenFor(m => m.Dest.ImageLink)
+                                                                @Html.HiddenFor(m => m.Dest.ThumbLink)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+
+                                                <div class="form-group">
+                                                    <label class="control-label">Destination Details</label>
+                                                    <div class="append-icon">
+                                                        @Html.TextAreaFor(m => m.Dest.Description, new { @class = "form-control", @placeholder = "Enter destination details", @rows = "6", @maxlength = "4000" })
+                                                        <i class="icon-lock"></i>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary btn-embossed">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    
+
+    <div class="modal fade" id="modal-view-destination" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                    <h4 class="modal-title"><strong>View</strong> Destination</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4><strong><i class="fa fa-tags"></i>&nbsp;Location: </strong><span class="location">NA</span></h4>
+                        </div>
+                        <div class="col-md-7">
+                            <h4><strong><i class="fa fa-image"></i>&nbsp;Destination Name: </strong><span class="dest-name">NA</span></h4>
+
+                        </div>
+                        <div class="col-md-12">
+                            <h4 class="m-b-0 m-t-20"><strong><i class="fa fa-edit"></i>&nbsp;Description: </strong></h4>
+                            <div class="desc-div">
+                                <i class="fa fa-quote-left"></i>
+                                <span class="dest-description">NA</span>
+                                <i class="fa fa-quote-right"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="header">
+            <h2><strong><i class="fa fa-image"></i>@ViewBag.Title</strong></h2>
+            <div class="breadcrumb-wrapper">
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="#">Destination</a>
+                    </li>
+                    <li class="active">@ViewBag.Title</li>
+                </ol>
+            </div>
+        </div>
+
+
+        <div class="row" id="destinationlist">
+            @{Html.RenderPartial("DestinationTable", Model.DT);}
+
+        </div>
+
+    </div>
+    <script>
+        changeActive(3);
+    </script>
+    <script src="~/Resources/assets/customjs/managedestination.js"></script>

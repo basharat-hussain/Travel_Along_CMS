@@ -1,0 +1,88 @@
+﻿@using System.Data;
+@model DataTable
+<div class="col-md-12 portlets">
+    <div class="panel">
+        <div class="panel-header panel-controls">
+            <h3><i class="fa fa-table"></i> <strong>Hotels</strong></h3>
+            @if (ViewBag.Tran != null && ViewBag.Msg != null)
+            {
+                if (ViewBag.Tran == "True")
+                {
+                    <div class="alert alert-success" id="errLbl">
+                        <span>@ViewBag.Msg</span>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-danger" id="errLbl">
+                        <span>@ViewBag.Msg</span>
+                    </div>
+                }
+
+            }
+            <div class="control-btn">
+                <a data-ajax="true" id="btnupdatehtllist" data-ajax-method="POST" data-ajax-loading="#tblLoader" data-ajax-mode="replace" data-ajax-update="#hotellist" href="/Hotel/ViewHotelAjax"><i class="icon-reload"></i></a>
+
+                <a href="#" class="panel-maximize hidden"><i class="icon-size-fullscreen"></i></a>
+            </div>
+            <div class="panel-content">
+                @if (Model.Rows.Count > 0)
+                {
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Hotel category</th>
+                                <th>Image</th>
+                                <th>Controls</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int x = 1;}
+                            @foreach (DataRow row in Model.Rows)
+                            {
+
+                            <tr>
+                                <td>@(x++)</td>
+                                <td>@row["HotelName"]</td>
+                                
+                                <td>@row["HotelCategory"]</td>
+                                <td>
+                                    @{
+                                        string ImageLink = row["ImageLink"].ToString();
+                                        //ImageLink = ImageLink.Substring(ImageLink.IndexOf("\\Resources"));
+
+                                    }
+
+                                    <a class="btnimage btn btn-sm btn-default" data-image="@ImageLink" title="View Image" data-title="@row["HotelName"]"><i class="fa fa-image"></i>&nbsp;View</a>
+
+                                </td>
+
+
+                                <td>
+                                    <a class="btnviewhotel btn btn-sm btn-default" href="javascript:;" title="View Hotel" data-name="@row["HotelName"]" data-address="@row["HotelAddress"]" data-hotel-desc="@row["HotelDescription"]" data-category="@row["HotelCategory"]" data-location="@row["Location"]" data-features="@row["Features"]" ><i class="fa fa-search"></i></a>
+
+
+                                    <a class="btnviewhoted btn btn-sm btn-default" href="javascript:;" title="Edit Hotel" data-id="@row["HotelID"]" data-name="@row["HotelName"]" data-address="@row["HotelAddress"]" data-hotel-desc="@row["HotelDescription"]" data-category="@row["HotelCategory"]" data-locationid="@row["LocationID"]"   data-features="@row["Features"]" data-image="@row["ImageLink"]" data-thumb="@row["ThumbnailLink"]" >
+                                        <i class="icon-note"></i></a>
+
+                                    <a class="delete btn btn-sm btn-danger" title="Delete Hotel" data-ajax="true" data-ajax-confirm="Are you sure you want to delete the Hotel?" data-ajax-loading="#tblLoader" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#hotellist" href="/Hotel/Delete?ID=@row["HotelID"]&ImageUrl=@row["ImageLink"]&ThumbUrl=@row["ThumbnailLink"]"><i class="icons-office-52"></i></a>
+                                </td>
+                            </tr>
+                            }
+
+
+
+
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <h5>No Hotel Found</h5>
+                }
+            </div>
+        </div>
+    </div>
+</div>

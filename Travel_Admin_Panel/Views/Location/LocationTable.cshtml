@@ -1,0 +1,93 @@
+﻿
+@using System.Data;
+@model DataTable
+<div class="col-md-12 portlets">
+    <div class="panel">
+        <div class="panel-header panel-controls">
+            <h3><i class="fa fa-table"></i> <strong>Locations</strong></h3>
+            @if (ViewBag.Tran != null && ViewBag.Msg != null)
+            {
+                if (ViewBag.Tran == "True")
+                {
+                    <div class="alert alert-success" id="errLbl">
+                        <span>@ViewBag.Msg</span>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-danger" id="errLbl">
+                        <span>@ViewBag.Msg</span>
+                    </div>
+                }
+
+            }
+            <div class="control-btn">
+                <a data-ajax="true" id="btnupdatelocationlist" data-ajax-method="POST" data-ajax-loading="#tblLoader" data-ajax-mode="replace" data-ajax-update="#locationlist" href="/Location/ViewLocationsAjax"><i class="icon-reload"></i></a>
+                <a href="#" class="panel-maximize hidden"><i class="icon-size-fullscreen"></i></a>
+            </div>
+            <div class="panel-content">
+                @if (Model.Rows.Count > 0)
+                {
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Image</th>
+                                <th>Controls</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int x = 1;}
+                            @foreach (DataRow row in Model.Rows)
+                            {
+
+                                <tr>
+                                    <td>@(x++)</td>
+                                    <td>@row["LocationName"]</td>
+                                    <td>
+                                        @if (@row["LocationDescription"].ToString().Length > 50)
+                                        {
+                                            @row["LocationDescription"].ToString().Substring(0, 50)
+
+                                        }
+                                        else
+                                        {
+                                            @row["LocationDescription"]
+                                        }...
+                                    </td>
+                                    <td>
+                                        @{
+                                            string ImageLink = row["LocationImage"].ToString();
+                                            //ImageLink = ImageLink.Substring(ImageLink.IndexOf("\\Resources"));
+
+                                        }
+
+                                        <a class="btnimage btn btn-sm btn-default" data-image="@ImageLink" title="View Image" data-title="@row["LocationName"]"><i class="fa fa-image"></i>&nbsp;View</a>
+
+                                    </td>
+                                    <td>
+                                        <a class="btnviewlocation btn btn-sm btn-default" href="javascript:;" title="View Destination" data-name="@row["LocationName"]" data-location="@row["LocationName"]" data-description="@row["LocationDescription"]"><i class="fa fa-search"></i></a>
+
+                                        <a class="btnviewlocationed btn btn-sm btn-default" href="javascript:;" title="Edit Destination" data-name="@row["LocationName"]"  data-description="@row["LocationDescription"]" data-image="@row["LocationImage"]" data-ID="@row["LocationID"]"><i class="icon-note"></i></a>
+                                        <a class="delete btn btn-sm btn-danger" title="Delte Destination" data-ajax="true" data-ajax-confirm="Are you sure you want to delete the Destination?" data-ajax-loading="#tblLoader" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#locationlist" href="/Location/Delete?ID=@row["LocationID"]&ImageUrl=@row["LocationImage"]"><i class="icons-office-52"></i></a>
+                                    </td>
+                                </tr>
+                            }
+
+
+
+
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <h5>No Location Found</h5>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

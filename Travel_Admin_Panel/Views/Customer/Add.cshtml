@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+
+
+<div>
+    <div class="header">
+        <h2><strong><i class="fa fa-image"></i>@ViewBag.Title</strong></h2>
+        <div class="breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#">Customer</a>
+                </li>
+                <li class="active">@ViewBag.Title</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="panel panel-default no-bd">
+                <div class="panel-header bg-dark">
+                    <h2 class="panel-title"><strong><i class="fa fa-plus"></i>Add</strong> Customer</h2>
+                </div>
+                <div class="panel-body bg-white">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="alert alert-danger display-hide" id="errLbl">
+                                <span></span>
+                            </div>
+                            @model Travel_Admin_Panel.Models.Customer
+                            <form id="customeraddform" method="post" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Name</label>
+                                            <div class="append-icon">
+                                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Name", @type = "text" })
+                                                <i class="fa fa-image"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Email Address</label>
+                                            <div class="append-icon">
+                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email Address", @type = "email" })
+                                                <i class="fa fa-image"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Address</label>
+                                            <div class="append-icon">
+                                                @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Address", @type = "text" })
+                                                <i class="fa fa-image"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Phone</label>
+                                            <div class="append-icon">
+                                                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @placeholder = "Phone no.", @type = "text" })
+                                                <i class="fa fa-image"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center m-t-20">
+                                    <button type="submit" id="btnaddcustomer" class="btn btn-embossed btn-primary"><i class="fa fa-plus"></i>&nbsp;Add</button>
+                                    <button type="reset" class="cancel btn btn-embossed btn-default m-b-10 m-r-0">Reset</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Resources/assets/customjs/addCustomer.js"></script>
+<script>
+    changeActive(9);
+</script>

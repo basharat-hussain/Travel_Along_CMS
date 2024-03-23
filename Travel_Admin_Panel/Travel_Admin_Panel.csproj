@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DC0608E7-DBAA-45AD-A24A-11D66FBA6E33}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Travel_Admin_Panel</RootNamespace>
+    <AssemblyName>Travel_Admin_Panel</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.30506.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.30506.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Code\DBConnection.cs" />
+    <Compile Include="App_Code\SessionAuthorizeAttribute.cs" />
+    <Compile Include="Controllers\ActivityController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\DestinationController.cs" />
+    <Compile Include="Controllers\FileUploadController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HotelController.cs" />
+    <Compile Include="Controllers\LocationController.cs" />
+    <Compile Include="Controllers\PackageController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
+    <Compile Include="Controllers\TransportController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Activity.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Destination.cs" />
+    <Compile Include="Models\Hotel.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\Package.cs" />
+    <Compile Include="Models\Review.cs" />
+    <Compile Include="Models\Transport.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Global.asax" />
+    <Content Include="Resources\assets\admin\layout2\css\layout.css" />
+    <Content Include="Resources\assets\admin\layout2\js\layout.js" />
+    <Content Include="Resources\assets\customjs\addactivity.js" />
+    <Content Include="Resources\assets\customjs\addCustomer.js" />
+    <Content Include="Resources\assets\customjs\adddestination.js" />
+    <Content Include="Resources\assets\customjs\addhotel.js" />
+    <Content Include="Resources\assets\customjs\addpackage.js" />
+    <Content Include="Resources\assets\customjs\addtransport.js" />
+    <Content Include="Resources\assets\customjs\bh_general.js" />
+    <Content Include="Resources\assets\customjs\layout_main.js" />
+    <Content Include="Resources\assets\customjs\addlocation.js" />
+    <Content Include="Resources\assets\customjs\login.js" />
+    <Content Include="Resources\assets\customjs\manageactivity.js" />
+    <Content Include="Resources\assets\customjs\managecustomer.js" />
+    <Content Include="Resources\assets\customjs\managedestination.js" />
+    <Content Include="Resources\assets\customjs\managehotel.js" />
+    <Content Include="Resources\assets\customjs\managelocation.js" />
+    <Content Include="Resources\assets\customjs\managepackages.js" />
+    <Content Include="Resources\assets\customjs\managereview.js" />
+    <Content Include="Resources\assets\customjs\managetransport.js" />
+    <Content Include="Resources\assets\global\css\icons\font-awesome\font-awesome.css" />
+    <Content Include="Resources\assets\global\css\icons\font-awesome\fontawesome-webfonte0a5.html" />
+    <Content Include="Resources\assets\global\css\icons\font-awesome\fontawesome-webfonte0a5.svg" />
+    <Content Include="Resources\assets\global\css\icons\line-icons\fonts\line-icons.svg" />
+    <Content Include="Resources\assets\global\css\icons\line-icons\fonts\Simple-Line-Icons.svg" />
+    <Content Include="Resources\assets\global\css\icons\line-icons\line-icons.css" />
+    <Content Include="Resources\assets\global\css\icons\line-icons\simple-line-icons.css" />
+    <Content Include="Resources\assets\global\css\icons\octicons\octicons.css" />
+    <Content Include="Resources\assets\global\css\icons\octicons\octicons.svg" />
+    <Content Include="Resources\assets\global\css\icons\rounded\fonts\Metrize-Icons.svg" />
+    <Content Include="Resources\assets\global\css\icons\rounded\style.css" />
+    <Content Include="Resources\assets\global\css\icons\weather\css\weather-icons.min.css" />
+    <Content Include="Resources\assets\global\css\icons\weather\weatherfont\artill_clean_icons-webfont.html" />
+    <Content Include="Resources\assets\global\css\images\icons\weather-main.html" />
+    <Content Include="Resources\assets\global\css\style.css" />
+    <Content Include="Resources\assets\global\css\theme.css" />
+    <Content Include="Resources\assets\global\css\ui.css" />
+    <Content Include="Resources\assets\global\images\avatars\avatar10.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar10_big.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar11.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar11_big.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar12_big.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar13.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar13_big.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar1_big.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar2_big.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar3.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar3_big.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar4.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar4_big.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar5.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar5_big.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar6.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar6_big.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar7.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar7_big.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar8.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar8_big.png" />
+    <Content Include="Resources\assets\global\images\avatars\avatar9_big.png" />
+    <Content Include="Resources\assets\global\images\clock\clock-white.png" />
+    <Content Include="Resources\assets\global\images\clock\clock.png" />
+    <Content Include="Resources\assets\global\images\clock\hourhand-white.png" />
+    <Content Include="Resources\assets\global\images\clock\hourhand.png" />
+    <Content Include="Resources\assets\global\images\clock\minhand-white.png" />
+    <Content Include="Resources\assets\global\images\clock\minhand.png" />
+    <Content Include="Resources\assets\global\images\clock\sechand-white.png" />
+    <Content Include="Resources\assets\global\images\clock\sechand.png" />
+    <Content Include="Resources\assets\global\images\favicon.png" />
+    <Content Include="Resources\assets\global\images\gradient-big.png" />
+    <Content Include="Resources\assets\global\images\loading_dots.gif" />
+    <Content Include="Resources\assets\global\images\logo\software_logo.png" />
+    <Content Include="Resources\assets\global\images\logo\times_master_developer.png" />
+    <Content Include="Resources\assets\global\images\profil_page\profile_image.png" />
+    <Content Include="Resources\assets\global\images\social\icon-dribbble.png" />
+    <Content Include="Resources\assets\global\images\social\icon-facebook.png" />
+    <Content Include="Resources\assets\global\images\social\icon-google.png" />
+    <Content Include="Resources\assets\global\images\social\icon-linkedin.png" />
+    <Content Include="Resources\assets\global\images\social\icon-pinterest.png" />
+    <Content Include="Resources\assets\global\images\social\icon-twitter.png" />
+    <Content Include="Resources\assets\global\images\various\icon-search-gray.png" />
+    <Content Include="Resources\assets\global\images\widgets\pagination.png" />
+    <Content Include="Resources\assets\global\js\application.js" />
+    <Content Include="Resources\assets\global\js\builder.js" />
+    <Content Include="Resources\assets\global\js\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Resources\assets\global\js\pages\animations.js" />
+    <Content Include="Resources\assets\global\js\pages\charts.js" />
+    <Content Include="Resources\assets\global\js\pages\charts_finance.js" />
+    <Content Include="Resources\assets\global\js\pages\coming_soon.js" />
+    <Content Include="Resources\assets\global\js\pages\contact.js" />
+    <Content Include="Resources\assets\global\js\pages\dashboard.js" />
+    <Content Include="Resources\assets\global\js\pages\ecommerce.js" />
+    <Content Include="Resources\assets\global\js\pages\editor.js" />
+    <Content Include="Resources\assets\global\js\pages\form_icheck.js" />
+    <Content Include="Resources\assets\global\js\pages\form_plugins.js" />
+    <Content Include="Resources\assets\global\js\pages\form_wizard.js" />
+    <Content Include="Resources\assets\global\js\pages\fullcalendar.js" />
+    <Content Include="Resources\assets\global\js\pages\icons.js" />
+    <Content Include="Resources\assets\global\js\pages\image_croping.js" />
+    <Content Include="Resources\assets\global\js\pages\layouts_api.js" />
+    <Content Include="Resources\assets\global\js\pages\lockscreen.js" />
+    <Content Include="Resources\assets\global\js\pages\login-v1.js" />
+    <Content Include="Resources\assets\global\js\pages\login-v2.js" />
+    <Content Include="Resources\assets\global\js\pages\mailbox.js" />
+    <Content Include="Resources\assets\global\js\pages\maps-google.js" />
+    <Content Include="Resources\assets\global\js\pages\maps-vector.js" />
+    <Content Include="Resources\assets\global\js\pages\notifications.js" />
+    <Content Include="Resources\assets\global\js\pages\pricing_table.js" />
+    <Content Include="Resources\assets\global\js\pages\profil.js" />
+    <Content Include="Resources\assets\global\js\pages\search.js" />
+    <Content Include="Resources\assets\global\js\pages\session_timeout.js" />
+    <Content Include="Resources\assets\global\js\pages\slider.js" />
+    <Content Include="Resources\assets\global\js\pages\table_dynamic.js" />
+    <Content Include="Resources\assets\global\js\pages\table_editable.js" />
+    <Content Include="Resources\assets\global\js\pages\timeline.js" />
+    <Content Include="Resources\assets\global\js\pages\translation.js" />
+    <Content Include="Resources\assets\global\js\pages\tree_view.js" />
+    <Content Include="Resources\assets\global\js\plugins.js" />
+    <Content Include="Resources\assets\global\js\quickview.js" />
+    <Content Include="Resources\assets\global\js\sidebar_hover.js" />
+    <Content Include="Resources\assets\global\js\widgets\notes.js" />
+    <Content Include="Resources\assets\global\js\widgets\todo_list.js" />
+    <Content Include="Resources\assets\global\js\widgets\widget_weather.js" />
+    <Content Include="Resources\assets\global\plugins\appear\jquery.appear.js" />
+    <Content Include="Resources\assets\global\plugins\bootbox\bootbox.min.js" />
+    <Content Include="Resources\assets\global\plugins\bootstrap-context-menu\bootstrap-contextmenu.min.js" />
+    <Content Include="Resources\assets\global\plugins\bootstrap-datepicker\css\bootstrap-datepicker3.min.css" />
+    <Content Include="Resources\assets\global\plugins\bootstrap-datepicker\js\bootstrap-datepicker.js" />
+    <Content Include="Resources\assets\global\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.es.min.js" />
+    <Content Include="Resources\assets\global\plugins\bootstrap-dropdown\bootstrap-hover-dropdown.min.js" />
+    <Content Include="Resources\assets\global\plugins\bootstrap-editable\css\bootstrap-editable.css" />
+    <Content Include="Resources\assets\global\plugins\bootstrap-editable\img\clear.png" />
+    <Content Include="Resources\assets\global\plugins\bootstrap-editable\img\loading.gif" />
+    <Content Include="Resources\assets\global\plugins\bootstrap-editable\js\bootstrap-editable.min.js" />
+    <Content Include="Resources\assets\global\plugins\bootstrap-loading\lada.min.css" />
+    <Content Include="Resources\assets\global\plugins\bootstrap-loading\lada.min.js" />
+    <Content Include="Resources\assets\global\plugins\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Resources\assets\global\plugins\bootstrap\css\jasny-bootstrap.css" />
+    <Content Include="Resources\assets\global\plugins\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Resources\assets\global\plugins\bootstrap\js\jasny-bootstrap.min.js" />
+    <Content Include="Resources\assets\global\plugins\datatables\dataTables.bootstrap.min.js" />
+    <Content Include="Resources\assets\global\plugins\datatables\dataTables.min.css" />
+    <Content Include="Resources\assets\global\plugins\datatables\jquery.dataTables.min.js" />
+    <Content Include="Resources\assets\global\plugins\jquery-ui\jquery-ui.min.js" />
+    <Content Include="Resources\assets\global\plugins\jquery\jquery-3.1.0.min.js" />
+    <Content Include="Resources\assets\global\plugins\jquery\jquery-migrate-3.0.0.min.js" />
+    <Content Include="Resources\assets\global\plugins\metrojs\metrojs.min.css" />
+    <Content Include="Resources\assets\global\plugins\metrojs\metrojs.min.js" />
+    <Content Include="Resources\assets\global\plugins\modernizr\modernizr-2.6.2-respond-1.1.0.min.js" />
+    <Content Include="Resources\assets\global\plugins\skycons\skycons.js" />
+    <Content Include="Resources\assets\global\plugins\skycons\skycons.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="bin\" />
+    <Folder Include="Resources\assets\UplaodedImages\Activity\" />
+    <Folder Include="Resources\assets\UplaodedImages\Destination\" />
+    <Folder Include="Resources\assets\UplaodedImages\Hotel\" />
+    <Folder Include="Resources\assets\UplaodedImages\Location\" />
+    <Folder Include="Resources\assets\UplaodedImages\Package\" />
+    <Folder Include="Resources\assets\UplaodedImages\Transport\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\assets\global\css\icons\font-awesome\fontawesome-webfontd41d.eot" />
+    <Content Include="Resources\assets\global\css\icons\font-awesome\fontawesome-webfonte0a5.eot" />
+    <Content Include="Resources\assets\global\css\icons\font-awesome\fontawesome-webfonte0a5.ttf" />
+    <Content Include="Resources\assets\global\css\icons\font-awesome\fontawesome-webfonte0a5.woff" />
+    <Content Include="Resources\assets\global\css\icons\line-icons\fonts\line-icons.eot" />
+    <Content Include="Resources\assets\global\css\icons\line-icons\fonts\line-icons.ttf" />
+    <Content Include="Resources\assets\global\css\icons\line-icons\fonts\line-icons.woff" />
+    <Content Include="Resources\assets\global\css\icons\line-icons\fonts\line-iconsd41d.eot" />
+    <Content Include="Resources\assets\global\css\icons\line-icons\fonts\Simple-Line-Icons.eot" />
+    <Content Include="Resources\assets\global\css\icons\line-icons\fonts\Simple-Line-Icons.ttf" />
+    <Content Include="Resources\assets\global\css\icons\line-icons\fonts\Simple-Line-Icons.woff" />
+    <Content Include="Resources\assets\global\css\icons\line-icons\fonts\Simple-Line-Iconsd41d.eot" />
+    <Content Include="Resources\assets\global\css\icons\octicons\octicons.ttf" />
+    <Content Include="Resources\assets\global\css\icons\octicons\octiconsd41d.eot" />
+    <Content Include="Resources\assets\global\css\icons\rounded\fonts\Metrize-Icons.eot" />
+    <Content Include="Resources\assets\global\css\icons\rounded\fonts\Metrize-Icons.ttf" />
+    <Content Include="Resources\assets\global\css\icons\rounded\fonts\Metrize-Iconsd41d.eot" />
+    <Content Include="Resources\assets\global\css\icons\weather\artill_clean_icons-webfont.eot" />
+    <Content Include="Resources\assets\global\css\icons\weather\artill_clean_icons-webfont.ttf" />
+    <Content Include="Resources\assets\global\css\icons\weather\artill_clean_icons-webfont.woff" />
+    <Content Include="Resources\assets\global\css\icons\weather\artill_clean_icons-webfontd41d.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_LayoutMain.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Dashboard.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\Login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\Add.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Destination\DestinationTable.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Package\Add.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\Travel_Back.pubxml" />
+    <Content Include="Views\Location\Add.cshtml" />
+    <Content Include="Views\Transport\Add.cshtml" />
+    <Content Include="Views\Customer\Add.cshtml" />
+    <Content Include="Views\Hotel\Add.cshtml" />
+    <Content Include="Views\Activity\Add.cshtml" />
+    <Content Include="Views\Destination\Manage.cshtml" />
+    <Content Include="Views\Location\Manage.cshtml" />
+    <Content Include="Views\Location\LocationTable.cshtml" />
+    <Content Include="Views\Customer\Manage.cshtml" />
+    <Content Include="Views\Customer\CustomerTable.cshtml" />
+    <Content Include="Views\Transport\TransportTable.cshtml" />
+    <Content Include="Views\Transport\Manage.cshtml" />
+    <Content Include="Views\Hotel\HotelTable.cshtml" />
+    <Content Include="Views\Hotel\Manage.cshtml" />
+    <Content Include="Views\Activity\ActivityTable.cshtml" />
+    <Content Include="Views\Activity\Manage.cshtml" />
+    <Content Include="Views\Review\Manage.cshtml" />
+    <Content Include="Views\Review\ReviewTable.cshtml" />
+    <Content Include="Views\Package\PackageTable.cshtml" />
+    <Content Include="Views\Package\Manage.cshtml" />
+    <Content Include="Views\Package\PackageFullView.cshtml" />
+    <Content Include="Views\Package\PackageEditView.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55222</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55222/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

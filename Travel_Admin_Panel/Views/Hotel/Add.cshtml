@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+
+    List<SelectListItem> LstCategory = new List<SelectListItem>();
+    LstCategory.Add(new SelectListItem() { Value = "Budget", Text = "Budget" });
+    LstCategory.Add(new SelectListItem() { Value = "Standard", Text = "Standard" });
+    LstCategory.Add(new SelectListItem() { Value = "Deluxe", Text = "Deluxe" });
+}
+
+<div>
+    <div class="header">
+        <h2><strong><i class="fa fa-image"></i>@ViewBag.Title</strong></h2>
+        <div class="breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#">Hotel</a>
+                </li>
+                <li class="active">@ViewBag.Title</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="panel panel-default no-bd">
+                <div class="panel-header bg-dark">
+                    <h2 class="panel-title"><strong><i class="fa fa-plus"></i>Add</strong> Hotel</h2>
+                </div>
+                <div class="panel-body bg-white">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="alert alert-danger display-hide" id="errLbl">
+                                <span></span>
+                            </div>
+                            @model Travel_Admin_Panel.Models.CombinedHotelModel
+                            @{
+                                List<SelectListItem> LstLocations = Model.LocationList;
+                            }
+                            <form id="hotelcreateform" method="post" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Choose Location</label>
+                                            @Html.DropDownListFor(m => m.Htl.LocationID, LstLocations, "Select Location", new { @class = "form-control" })
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Name</label>
+                                            <div class="append-icon">
+                                                @Html.TextBoxFor(m => m.Htl.Name, new { @class = "form-control", @placeholder = "Name", @type = "text" })
+                                                <i class="fa fa-image"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Hotel Image (W:850px H:550px)</label>
+                                            <div class="file">
+                                                <div class="option-group">
+                                                    <span class="file-button btn-primary">Choose File</span>
+                                                    @Html.TextBoxFor(m => m.Htl.HotelImage, new { @class = "custom-file", @onchange = "document.getElementById('uploader').value=this.value;", @type = "file", @accept = "image/jpeg" })
+                                                    <input type="text" class="form-control" id="uploader" placeholder="no file selected" readonly="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Address</label>
+                                            <div class="append-icon">
+                                                @Html.TextBoxFor(m => m.Htl.Address, new { @class = "form-control", @placeholder = "Address", @type = "text" })
+                                                <i class="fa fa-map-marker"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Category</label>
+                                            <div class="append-icon">
+                                                @Html.DropDownListFor(m=>m.Htl.HotelCategory, LstCategory, "Select Category", new { @class="form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Hotel Description</label>
+                                            <div class="append-icon">
+                                                @Html.TextAreaFor(m => m.Htl.Description, new { @class = "form-control", @placeholder = "Enter hotel details", @rows = "6", @maxlength = "4000" })
+                                                <i class="icon-lock"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Hotel Features (seperated by semicolons(;)</label>
+                                            <div class="append-icon">
+                                                @Html.TextAreaFor(m => m.Htl.Features, new { @class = "form-control", @placeholder = "Enter hotel features", @rows = "6", @maxlength = "4000" })
+                                                <i class="icon-lock"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="text-center m-t-20">
+                                    <button type="submit" id="btnadddestination" class="btn btn-embossed btn-primary"><i class="fa fa-plus"></i>&nbsp;Add</button>
+                                    <button type="reset" class="cancel btn btn-embossed btn-default m-b-10 m-r-0">Reset</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    changeActive(5);
+</script>
+<script src="~/Resources/assets/customjs/addhotel.js"></script>
+

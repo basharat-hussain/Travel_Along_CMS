@@ -1,0 +1,78 @@
+﻿@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>TimesMaster - Travel Admin Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
+    <meta content="" name="Admin Panel for Travel" />
+    <meta content="TimesMaster Soft Solutions Pvt. Ltd" name="author" />
+    <link rel="shortcut icon" href="http://times-master.com/Resources/extra-images/favicon.png" type="image/png">
+    <link href="~/Resources/assets/global/css/style.css" rel="stylesheet">
+    <link href="~/Resources/assets/global/css/ui.css" rel="stylesheet">
+    <style>
+        .form-control.form-white {
+            border: 1px solid #c0c2c3;
+        }
+    </style>
+</head>
+<body class="sidebar-condensed account2" data-page="login">
+    <div class="container" id="login-block">
+
+        <div class="account-info">
+            <a href="" class="logo"></a>
+            <h3>Travel Website Management</h3>
+            <ul>
+                <li><i class="icon-pointer"></i> Easy to use Interface</li>
+                <li><i class="fa fa-desktop"></i> Responsive Layout</li>
+                <li><i class="icon-magic-wand"></i> Customizable Panel</li>
+                <li><i class="icon-briefcase"></i> Dynamic Packages</li>
+            </ul>
+        </div>
+        <div class="account-form">
+
+            <i class="user-img icons-faces-users-03"></i>
+
+            @model Travel_Admin_Panel.Models.User
+            @*<form class="form-signin" role="form" id="login-form" method="post" action="/User/Login">*@
+            @using (Ajax.BeginForm("Login", "User", new AjaxOptions { HttpMethod = "POST", OnBegin = "validateLogin", OnSuccess = "successLogin", OnFailure = "failureLogin" }, new { @class = "form-signin" }))
+            {
+                <h3><strong>Sign in</strong> to your account</h3>
+                <div class="alert alert-success display-hide" id="errLbl">
+                    <span></span>
+                </div>
+                <div class="append-icon">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control form-white", @type = "text", @placeholder = "Username" })
+                    <i class="icon-user"></i>
+                </div>
+                <div class="append-icon m-b-20">
+                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control form-white", @type = "password", @placeholder = "Password" })
+                    <i class="icon-lock"></i>
+                </div>
+                <button type="submit" id="btnSignIn" class="btn btn-lg btn-dark btn-rounded">Sign In</button>
+
+            }
+
+
+        </div>
+    </div>
+    <!-- END LOCKSCREEN BOX -->
+    <p class="account-copyright">
+        <span>Copyright © 2018 </span><a href="http://www.times-master.com" target="_blank" title="TimesMaster Soft Solutions Pvt. Ltd.">TimesMaster Soft Solutions</a>. <span>All rights reserved.</span>
+    </p>
+
+    <script src="~/Resources/assets/global/plugins/jquery/jquery-3.1.0.min.js"></script>
+    <script src="~/Resources/assets/global/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Resources/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Resources/assets/global/js/pages/login-v2.js"></script>
+    <script src="~/Resources/assets/admin/layout2/js/layout.js"></script>
+    <script src="~/Resources/assets/customjs/bh_general.js"></script>
+    <script src="~/Resources/assets/customjs/login.js"></script>
+
+</body>
+</html>

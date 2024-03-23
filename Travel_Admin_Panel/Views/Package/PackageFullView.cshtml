@@ -1,0 +1,116 @@
+﻿@using System.Data
+@model DataSet
+@{
+    DataTable TblPackage = Model.Tables[0];
+    DataTable TblPackageDays = Model.Tables[1];
+}
+
+
+@if (TblPackage.Rows.Count > 0)
+{
+    DataRow Row = TblPackage.Rows[0];
+
+    <div class="col-md-6">
+        <h4><strong><i class="fa fa-edit"></i>&nbsp;Package Title: </strong><span>@Row["PackageTitle"]</span></h4>
+    </div>
+
+    <div class="col-md-6">
+        <h4><strong><i class="fa fa-map-marker"></i>&nbsp;Location: </strong><span>@Row["Location"]</span></h4>
+    </div>
+
+
+
+    <div class="col-md-6">
+        <h4><strong><i class="fa fa-calendar-o"></i>&nbsp;Package Duration: </strong><span>@Row["PackageDuration"]</span></h4>
+
+    </div>
+    <div class="col-md-6">
+        <h4><strong><i class="fa fa-money"></i>&nbsp;Package Rate: </strong><span>@Row["PackageRate"]</span></h4>
+    </div>
+
+
+    <div class="col-md-6">
+        <h4 class="m-b-10 m-t-20"><strong><i class="fa fa-plus"></i>&nbsp;Package Inclusions: </strong></h4>
+        <div>
+            <span>
+                @{
+
+                    String[] Inclusions = Row["PackageInclusions"].ToString().Split(';');
+                    if (Inclusions[Inclusions.Length - 1] == "")
+                    {
+                        Inclusions = Inclusions.Take(Inclusions.Length - 1).ToArray<String>();
+                    }
+                }
+
+                @foreach (String Inclusion in Inclusions)
+                {
+                    <label class="label label-success pad-5 text-14">@Inclusion.Trim()</label>
+                }
+
+
+            </span>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <h4 class="m-b-10 m-t-20"><strong><i class="fa fa-minus"></i>&nbsp;Package Exclusion: </strong></h4>
+        <div>
+            <span>
+                @{
+
+                    String[] Exclusions = Row["PackageExclusions"].ToString().Split(';');
+                    if (Exclusions[Exclusions.Length - 1] == "")
+                    {
+                        Exclusions = Exclusions.Take(Inclusions.Length - 1).ToArray<String>();
+                    }
+                }
+
+                @foreach (String Exclusion in Exclusions)
+                {
+                    <label class="label label-danger pad-5 text-14">@Exclusion.Trim()</label>
+                }
+
+
+            </span>
+        </div>
+    </div>
+
+    
+    <div class="col-md-12">
+        <h4 class="m-b-10 m-t-20"><strong><i class="fa fa-align-justify"></i>&nbsp;Package Description: </strong></h4>
+        <div>
+            <i class="fa fa-quote-left"></i>
+            <span>@Row["PackageDescription"]</span>
+            <i class="fa fa-quote-right"></i>
+        </div>
+
+    </div>
+
+}
+else
+{
+    <div class="col-md-12">
+        <h4 class="text-center"><strong>Sorry no data found for this package</strong></h4>
+    </div>
+
+}
+
+
+
+@{ int count = 1;}
+@foreach (DataRow DayRow in TblPackageDays.Rows)
+{
+    <div class="col-md-6">
+        <h4 class="m-b-10 m-t-20"><strong><i class="fa fa-clock-o"></i>&nbsp;Day : @(count++) -  [@DayRow["DayTitle"]] </strong></h4>
+        <div>
+            <span class="dest-description">@DayRow["DayDescription"]</span>
+        </div>
+
+    </div>
+}
+
+
+
+
+
+<div class="clearfix"></div>

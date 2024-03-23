@@ -1,0 +1,84 @@
+﻿@using System.Data
+@model DataTable
+<div class="col-md-12 portlets">
+    <div class="panel">
+        <div class="panel-header panel-controls">
+            <h3><i class="fa fa-table"></i> <strong>Transport</strong></h3>
+            @if (ViewBag.Tran != null && ViewBag.Msg != null)
+            {
+                if (ViewBag.Tran == "True")
+                {
+                    <div class="alert alert-success" id="errLbl">
+                        <span>@ViewBag.Msg</span>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-danger" id="errLbl">
+                        <span>@ViewBag.Msg</span>
+                    </div>
+                }
+
+            }
+            <div class="control-btn">
+                <a data-ajax="true" id="btnupdatetportlist" data-ajax-method="POST" data-ajax-loading="#tblLoader" data-ajax-mode="replace" data-ajax-update="#transportlist" href="/Transport/ViewTransportAjax"><i class="icon-reload"></i></a>
+                <a href="#" class="panel-maximize hidden"><i class="icon-size-fullscreen"></i></a>
+            </div>
+            <div class="panel-content">
+                @if (Model.Rows.Count > 0)
+                {
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Features</th>
+                                <th>Rate</th>
+                                <th>Image</th>
+                                <th>Controls</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int x = 1;}
+                            @foreach (DataRow row in Model.Rows)
+                            {
+
+                                <tr>
+                                    <td>@(x++)</td>
+                                    <td>@row["TransportName"]</td>
+                                    <td>@row["TransportFeatures"]</td>
+                                    <td>@row["TransportRate"]</td>
+                                    <td>
+                                        @{
+                                            string ImageLink = row["ImageLink"].ToString();
+                                            //ImageLink = ImageLink.Substring(ImageLink.IndexOf("\\Resources"));
+
+                                        }
+
+                                        <a class="btnimage btn btn-sm btn-default" data-image="@ImageLink" title="View Image" data-title="@row["TransportName"]"><i class="fa fa-image"></i>&nbsp;View</a>
+
+                                    </td>
+
+                                    <td>
+
+                                        <a class="btnviewtported btn btn-sm btn-default" href="javascript:;" title="Edit transport" data-title="@row["TransportName"]" data-id="@row["TransportID"]" data-features="@row["TransportFeatures"]" data-image="@row["ImageLink"]" data-rate="@row["TransportRate"]"><i class="icon-note"></i></a>
+
+                                        <a class="delete btn btn-sm btn-danger" title="Delte Destination" data-ajax="true" data-ajax-confirm="Are you sure you want to delete the Destination?" data-ajax-loading="#tblLoader" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#transportlist" href="/Transport/Delete?ID=@row["TransportID"]&ImageUrl=@row["ImageLink"]"><i class="icons-office-52"></i></a>
+                                    </td>
+                                </tr>
+                            }
+
+
+
+
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <h5>No Transport Found</h5>
+                }
+            </div>
+        </div>
+    </div>
+</div>

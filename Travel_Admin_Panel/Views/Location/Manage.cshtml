@@ -1,0 +1,160 @@
+﻿@{
+
+    ViewBag.Title = "ViewLocations";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+@using System.Data;
+
+@model Travel_Admin_Panel.Models.CombinedLocationModel
+
+@* Modal Image View *@
+<div class="modal fade modal-image" id="modal-image" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+            </div>
+            <div class="modal-body">
+                <img src="" alt="picture 1" class="img-responsive">
+            </div>
+            <div class="modal-footer">
+                <p>Location</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Modal Edit *@
+<div class="modal fade" id="modal-edit-location" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>Edit</strong> Location</h4>
+            </div>
+            <form id="locationeditform" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="alert alert-danger display-hide" id="errLbl">
+                                <span></span>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    @Html.HiddenFor(m => m.Loc.ID)
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Name</label>
+                                                <div class="append-icon">
+                                                    @Html.TextBoxFor(m => m.Loc.Name, new { @class = "form-control", @placeholder = "name", @type = "text" })
+                                                    <i class="fa fa-image"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Location Image (W:350px H:250px)</label>
+                                                <div class="file">
+                                                    <div class="option-group">
+                                                        <span class="file-button btn-primary">Choose File</span>
+                                                        @Html.TextBoxFor(m => m.Loc.LocationImage, new { @class = "custom-file", @onchange = "document.getElementById('uploader').value=this.value;", @type = "file", @accept = "image/jpeg" })
+                                                        <input type="text" class="form-control" id="uploader" placeholder="no file selected" readonly="">
+                                                        @Html.HiddenFor(m => m.Loc.ImageLink)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+
+                                        <div class="form-group">
+                                            <label class="control-label">Location Description</label>
+                                            <div class="append-icon">
+                                                @Html.TextAreaFor(m => m.Loc.Description, new { @class = "form-control", @placeholder = "Enter location description", @rows = "6", @maxlength = "4000" })
+                                                <i class="icon-lock"></i>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-embossed">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal-view-location" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>View</strong> Location</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <h4><strong><i class="fa fa-tags"></i>&nbsp;Location: </strong><span class="location">NA</span></h4>
+                    </div>
+                    @*<div class="col-md-7">
+                            <h4><strong><i class="fa fa-image"></i>&nbsp;Location Name: </strong><span class="dest-name">NA</span></h4>
+
+                        </div>
+                    *@
+                    <div class="col-md-12">
+                        <h4 class="m-b-0 m-t-20"><strong><i class="fa fa-edit"></i>&nbsp;Description: </strong></h4>
+                        <div class="desc-div">
+                            <i class="fa fa-quote-left"></i>
+                            <span class="loc-description">NA</span>
+                            <i class="fa fa-quote-right"></i>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="header">
+        <h2><strong><i class="fa fa-image"></i>@ViewBag.Title</strong></h2>
+        <div class="breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#">Location</a>
+                </li>
+                <li class="active">@ViewBag.Title</li>
+            </ol>
+        </div>
+    </div>
+
+
+    <div class="row" id="locationlist">
+        @{Html.RenderPartial("LocationTable", Model.DT);}
+
+    </div>
+
+</div>
+<script>
+    changeActive(2);
+</script>
+<script src="~/Resources/assets/customjs/managelocation.js"></script>

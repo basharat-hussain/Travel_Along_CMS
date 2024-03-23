@@ -1,0 +1,333 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width;initial-scale=1.0;" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="TimesMaster Admin Panel for Dynamic Travel Websites">
+    <meta name="author" content="TimesMaster Soft Solutions Pvt. Ltd. - +91-9797778284 | +91-9469391948">
+    <link rel="shortcut icon" href="http://times-master.com/Resources/extra-images/favicon.png" type="image/png">
+    <title>TravelLine Kashmir || @ViewBag.Title</title>
+    <link href="~/Resources/assets/global/css/style.css" rel="stylesheet">
+    <link href="~/Resources/assets/global/css/theme.css" rel="stylesheet">
+    <link href="~/Resources/assets/global/css/ui.css" rel="stylesheet">
+    <link href="~/Resources/assets/admin/layout2/css/layout.css" rel="stylesheet">
+    <script src="~/Resources/assets/global/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script src="~/Resources/assets/global/plugins/jquery/jquery-3.1.0.min.js"></script>
+    <script src="~/Resources/assets/customjs/bh_general.js"></script>
+
+
+</head>
+<body class="fixed-topbar fixed-sidebar theme-sdtl color-green dashboard">
+    <section>
+        @* Logout Modal *@
+        <div class="modal fade modal-slideleft" id="modal-logout-left" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="c-primary m-b-40">Are you sure you want to logout?</h2>
+                                <a href="/User/Logout" class="btn btn-danger btn-embossed btn-block">
+                                    <i class="icon-power white"></i> Yes, I'm sure
+                                </a>
+                                <button type="button" data-dismiss="modal" class="btn btn-white btn-block btn-success">Oops, I prefer not!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade modal-slideright" id="modal-logout-right" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="c-primary m-b-40">Are you sure you want to logout?</h2>
+                                <a href="/User/Logout" class="btn btn-danger btn-embossed btn-block">
+                                    <i class="icon-power white"></i> Yes, I'm sure
+                                </a>
+                                <button type="button" data-dismiss="modal" class="btn btn-white btn-block btn-success">Oops, I prefer not!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @* Change Password Modal *@
+        <div class="modal fade" id="modal-change-password" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                        <h4 class="modal-title"><strong>Change Password</strong></h4>
+                    </div>
+                    <form id="changepasswordform" method="post" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="alert alert-danger display-hide" id="errPassLbl">
+                                        <span></span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Current Password</label>
+                                                        <div class="append-icon">
+                                                            <input type="password" id="CurrentPassword" name="CurrentPassword" class="form-control" placeholder="Current Password" />
+                                                            <i class="fa fa-key"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">New Password</label>
+                                                        <div class="append-icon">
+                                                            <input type="password" id="NewPassword" name="NewPassword" class="form-control" placeholder="New Password" />
+                                                            <i class="fa fa-key"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Repeat New Password</label>
+                                                        <div class="append-icon">
+                                                            <input type="password" id="RepeatPassword" name="RepeatPassword" class="form-control" placeholder="Repeat New Password" />
+                                                            <i class="fa fa-key"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary btn-embossed">Change Password</button>
+                            <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        @* Software Information Modal *@
+        <div class="modal fade" id="modal-information" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content bg-primary">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                        <h4 class="modal-title"><strong>Software Information</strong></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div><img src="~/Resources/assets/global/images/logo/software_logo.png" /></div>
+                        <div class="col-md-12">
+                            <h4><strong>Purpose:</strong> Travel Website Management</h4>
+                            <h4><strong>Version:</strong> 1.1</h4>
+                            <h4><strong>Resolution:</strong> 1366 x 768</h4>
+                            <h4><strong>Vendor:</strong> TimesMaster Soft Solutions</h4>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-dark btn-embossed" href="http://www.times-master.com" target="_blank">Contact Vendor</a>
+                        <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @* SideBar *@
+        <div class="sidebar">
+            <div class="logopanel">
+                <h1>
+                    <a href="/"></a>
+                </h1>
+            </div>
+            <div class="sidebar-inner">
+                <div class="sidebar-top big-img">
+                    <div class="user-image">
+                        <img src="~/Resources/assets/global/images/profil_page/profile_image.png" class="img-responsive img-circle" />
+                    </div>
+                    <h4>TravelLine Kashmir</h4>
+                    @*<div class="dropdown user-login">
+                            <button class="btn btn-xs btn-rounded" type="button" id="onlinestatus"></button>
+                        </div>*@
+                </div>
+
+                @* Menu/Navigation *@
+                <ul class="nav nav-sidebar">
+                    <li class="nav-active active"><a href="/"><i class="icon-home"></i><span>Dashboard</span></a></li>
+
+                    <li class="nav-parent">
+                        <a href="#"><i class="icon-pin"></i><span>Location </span><span class="fa arrow"></span></a>
+                        <ul class="children collapse">
+                            <li><a href="/Location/Add">Add Location</a></li>
+                            <li><a href="/Location/Manage">Manage Locations</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-parent">
+                        <a href="#"><i class="icon-picture"></i><span>Destinations </span><span class="fa arrow"></span></a>
+                        <ul class="children collapse">
+                            <li><a href="/Destination/Add">Add Destinations</a></li>
+                            <li><a href="/Destination/Manage">Manage Destinations</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-parent">
+                        <a href="#"><i class="icon-briefcase"></i><span>Packages </span><span class="fa arrow"></span></a>
+                        <ul class="children collapse">
+                            <li><a href="/Package/Add">Add Packages</a></li>
+                            <li><a href="/Package/Manage">Manage Packages</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-parent">
+                        <a href="#"><i class="fa fa-hotel"></i><span>Hotel </span><span class="fa arrow"></span></a>
+                        <ul class="children collapse">
+                            <li><a href="/Hotel/Add">Add Hotel</a></li>
+                            <li><a href="/Hotel/Manage">Manage Hotel</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-parent">
+                        <a href="#"><i class="fa fa-support"></i><span>Activities </span><span class="fa arrow"></span></a>
+                        <ul class="children collapse">
+                            <li><a href="/Activity/Add">Add Activity</a></li>
+                            <li><a href="/Activity/Manage">Manage Activity</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-parent">
+                        <a href="#"><i class="fa fa-cab"></i><span>Transport </span><span class="fa arrow"></span></a>
+                        <ul class="children collapse">
+                            <li><a href="/Transport/Add">Add Transport</a></li>
+                            <li><a href="/Transport/Manage">Manage Transport</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-parent">
+                        <a href="#"><i class="fa fa-comment-o"></i><span>Feedback </span><span class="fa arrow"></span></a>
+                        <ul class="children collapse">
+                            <li><a href="/Review/Manage">Manage Feedback</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-parent">
+                        <a href="#"><i class="icon-user"></i><span>Customer </span><span class="fa arrow"></span></a>
+                        <ul class="children collapse">
+                            <li><a href="/Customer/Add">Add Customer</a></li>
+                            <li><a href="/Customer/Manage">Manage Customer</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                @* SideBar Footer Buttons *@
+                <div class="sidebar-footer clearfix">
+                    <a class="pull-left btn-effect" data-toggle="modal" href="#" data-target="#modal-logout-left" data-modal="modal-1" title="Logout">
+                        <i class="icon-power txt-red"></i>
+                    </a>
+                    <a class="pull-left" data-toggle="modal" href="#" data-target="#modal-change-password" title="Change Password">
+                        <i class="icon-lock-open"></i>
+                    </a>
+                    <a class="pull-left toggle_fullscreen" href="#" title="Full Screen View">
+                        <i class="icon-size-fullscreen"></i>
+                    </a>
+
+                    <a class="pull-left footer-settings" data-toggle="modal" data-target="#modal-information" href="#" title="Software Information">
+                        <i class="icon-info txt-green"></i>
+                    </a>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            @* Top Bar *@
+            <div class="topbar">
+                <div class="header-left">
+                    <div class="topnav">
+                        <a class="menutoggle" href="#" data-toggle="sidebar-collapsed"><span class="menu__handle"><span>Menu</span></span></a>
+
+                        @*<ul class="nav nav-icons">
+
+                                <li><a href="#" class="toggle-sidebar-top">
+                                    <span class="icon-user-following"></span>
+
+                                    </a></li>
+                                <li><a href="#"><span class="octicon octicon-mail-read"></span></a></li>
+                                <li><a href="#"><span class="octicon octicon-flame"></span></a></li>
+                                <li><a href="#"><span class="octicon octicon-rocket"></span></a></li>
+                            </ul>*@
+                    </div>
+                </div>
+                <div class="header-right">
+                    <ul class="header-menu nav navbar-nav">
+
+
+
+                        <li class="dropdown" id="user-header">
+                            <a href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <img src="~/Resources/assets/global/images/avatars/avatar11.png" alt="user image">
+                                <span class="username">Hi, <strong>@Session["UserSession"].ToString().ToUpper() </strong></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a data-toggle="modal" href="#" data-target="#modal-change-password"><i class="icon-lock-open txt-green"></i><span>Change Password</span></a>
+                                </li>
+                                <li>
+                                    <a data-toggle="modal" data-target="#modal-logout-right"><i class="icon-power txt-red"></i><span>Logout</span></a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+            @* Content Portion *@
+            <div class="page-content page-thin">
+                <div id="tblLoader">
+                    <div id="internal">
+                        <img src="~/Resources/assets/global/images/loading_dots.gif" />
+                    </div>
+                </div>
+                @RenderBody()
+                <div class="footer">
+                    <div class="copyright">
+                        <p class="pull-left sm-pull-reset">
+                            <span>Copyright<span class="copyright">©</span>2017 </span>
+                            <span><strong><a href="http://www.times-master.com" target="_blank">TimesMaster Soft Solutions</a></strong></span>.
+                            <span>All rights reserved. </span>
+                        </p>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a href="#" class="scrollup"><i class="fa fa-angle-up"></i></a>
+    <script src="~/Resources/assets/global/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Resources/assets/global/plugins/jquery/jquery-migrate-3.0.0.min.js"></script>
+    <script src="~/Resources/assets/global/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/Resources/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Resources/assets/global/js/application.js"></script> <!-- Main Application Script -->
+    <script src="~/Resources/assets/global/js/pages/dashboard.js"></script>
+    <script src="~/Resources/assets/admin/layout2/js/layout.js"></script>
+    <script src="~/Resources/assets/customjs/layout_main.js"></script>
+</body>
+</html>

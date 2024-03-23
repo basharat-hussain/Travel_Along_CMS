@@ -1,0 +1,102 @@
+﻿
+@{
+
+   ViewBag.Title = "ViewCustomers";
+   Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+@using System.Data
+
+@model Travel_Admin_Panel.Models.CombinedCustomerModel
+
+
+
+<div class="modal fade" id="modal-edit-customer" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>Edit</strong> Customer</h4>
+            </div>
+            <form id="customereditform" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="alert alert-danger display-hide" id="errLbl">
+                            <span></span>
+                        </div>
+                        @Html.HiddenFor(m=>m.Cust.ID)
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label">Name</label>
+                                <div class="append-icon">
+                                    @Html.TextBoxFor(m => m.Cust.Name, new { @class = "form-control", @placeholder = "Name", @type = "text" })
+                                    <i class="fa fa-image"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label">Email Address</label>
+                                <div class="append-icon">
+                                    @Html.TextBoxFor(m => m.Cust.Email, new { @class = "form-control", @placeholder = "Email Address", @type = "email" })
+                                    <i class="fa fa-image"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label">Address</label>
+                                <div class="append-icon">
+                                    @Html.TextBoxFor(m => m.Cust.Address, new { @class = "form-control", @placeholder = "Address", @type = "text" })
+                                    <i class="fa fa-image"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label">Phone</label>
+                                <div class="append-icon">
+                                    @Html.TextBoxFor(m => m.Cust.Phone, new { @class = "form-control", @placeholder = "Phone no.", @type = "text" })
+                                    <i class="fa fa-image"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-embossed">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <div class="header">
+        <h2><strong><i class="fa fa-image"></i>@ViewBag.Title</strong></h2>
+        <div class="breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#">Customer</a>
+                </li>
+                <li class="active">@ViewBag.Title</li>
+            </ol>
+        </div>
+    </div>
+
+
+    <div class="row" id="customerlist">
+        @{Html.RenderPartial("CustomerTable", Model.DT);}
+
+    </div>
+
+</div>
+<script>
+    changeActive(9);
+</script>
+<script src="~/Resources/assets/customjs/managecustomer.js"></script>
