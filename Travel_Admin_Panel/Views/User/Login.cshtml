@@ -40,7 +40,7 @@
 
             @model Travel_Admin_Panel.Models.User
             @*<form class="form-signin" role="form" id="login-form" method="post" action="/User/Login">*@
-            @using (Ajax.BeginForm("Login", "User", new AjaxOptions { HttpMethod = "POST", OnBegin = "validateLogin", OnSuccess = "successLogin", OnFailure = "failureLogin" }, new { @class = "form-signin" }))
+            @using (Ajax.BeginForm("Login", "User", new AjaxOptions { HttpMethod = "POST", OnBegin = "validateLogin", OnSuccess = "successLogin(data)", OnFailure = "failureLogin" }, new { @class = "form-signin" }))
             {
                 <h3><strong>Sign in</strong> to your account</h3>
                 <div class="alert alert-success display-hide" id="errLbl">

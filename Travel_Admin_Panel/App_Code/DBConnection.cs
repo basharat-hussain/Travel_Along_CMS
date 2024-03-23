@@ -10,7 +10,7 @@ namespace Travel_Admin_Panel.App_Code
         public DBConnection()
         {
             //ConnectionString = @"server=192.168.1.3; Database=TM_DB_Travel; User Id=sa; Password=Hussain@313#";
-            ConnectionString = @"server=35.154.165.160,2439; Database=TLK_DB_Travel; User Id=tlk_usr_kmr; Password=tlk_Pass#123";
+            ConnectionString = @"server=wow.grabweb.in,2419; Database=TravelAlong_DB; User Id=travelalong_dbuser; Password=TravelAlong_DB#Usr1";
         }
         #region Execute SP Query DataTable
         //Executes a stored Procedure Query

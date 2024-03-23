@@ -21,7 +21,7 @@ function validateLogin() {
 }
 
 function successLogin(response) {
-
+    debugger;
     if (response[0] == "True") {
         setSuccess($('#errLbl'), response[1]);
         location.href = "/Home/Dashboard"
@@ -32,7 +32,9 @@ function successLogin(response) {
     }
 }
 
-function failureLogin() {
+function failureLogin(err) {
+    debugger;
+    
     setError($('#errLbl'), "Unknown error occured!");
     $("#btnSignIn").html("Sign In").removeAttr('disabled');
 
