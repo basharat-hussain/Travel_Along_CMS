@@ -21,7 +21,7 @@
             <div class="row">
                 @if (Model.Rows.Count > 0)
                 {
-                    <div class="col-xlg-12 col-lg-4">
+                    <div class="col-lg-4">
                         <div class="panel">
                             <div class="panel-content widget-small bg-green">
                                 <div class="title">
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xlg-12 col-lg-4">
+                    <div class="col-lg-4">
                         <div class="panel">
                             <div class="panel-content widget-small bg-red">
                                 <div class="title">
@@ -58,25 +58,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xlg-12 col-lg-4">
-                        <div class="panel">
-                            <div class="panel-content widget-small bg-yellow">
-                                <div class="title">
-                                    <div class="widget-icon">
-                                        <i class="fa fa-hotel fa-3x"></i>
-                                    </div>
-                                    <div class="widget-details">
-                                        <h1>Hotel</h1>
-                                        <span>@Model.Rows[0]["HotelCount"]</span>
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <div id="stock-facebook-sm"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xlg-12 col-lg-4">
+                    
+                    <div class="col-lg-4">
                         <div class="panel">
                             <div class="panel-content widget-small bg-aero">
                                 <div class="title">
@@ -94,25 +77,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xlg-12 col-lg-4">
-                        <div class="panel">
-                            <div class="panel-content widget-small bg-blue">
-                                <div class="title">
-                                    <div class="widget-icon">
-                                        <i class="fa fa-users fa-3x"></i>
-                                    </div>
-                                    <div class="widget-details">
-                                        <h1>Customer</h1>
-                                        <span>@Model.Rows[0]["CustomerCount"]</span>
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <div id="stock-facebook-sm"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xlg-12 col-lg-4">
+                    
+                    <div class="col-lg-4">
                         <div class="panel">
                             <div class="panel-content widget-small bg-primary-dark">
                                 <div class="title">
@@ -149,7 +115,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/Destination/ViewDestinations">
+                <a href="/Destination/Manage">
                     <div class="infobox">
                         <div class="left">
                             <i class="fa fa-search bg-blue"></i>
@@ -178,7 +144,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/Package/ViewPackages">
+                <a href="/Package/Manage">
                     <div class="infobox">
                         <div class="left">
                             <i class="fa fa-search bg-purple"></i>
@@ -194,7 +160,7 @@
                     </div>
                 </a>
 
-                <a href="/TransportRates/Add">
+                <a href="/Transport/Add">
                     <div class="infobox">
                         <div class="left">
                             <i class="fa fa-cab bg-orange"></i>
@@ -207,7 +173,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/TransportRates/ViewTransportRates">
+                <a href="/Transport/Manage">
                     <div class="infobox">
                         <div class="left">
                             <i class="fa fa-search bg-purple"></i>

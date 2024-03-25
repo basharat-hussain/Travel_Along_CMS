@@ -22,8 +22,8 @@ namespace Travel_Admin_Panel.Controllers
             {
                 FileName = Guid.NewGuid() + ".jpg";
 
-                FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri("ftp://" + "travellinekashmir.com/Resources/uploadedimages/" + FolderName + "/" + FileName));
-                reqFTP.Credentials = new NetworkCredential("TMSS_fTP", "Tlk#fTp^123#");
+                FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri("ftp://" + "travelalong.in/Resources/uploadedimages/" + FolderName + "/" + FileName));
+                reqFTP.Credentials = new NetworkCredential("ftp_travelalong", "Trvl@l0ng@89#");
                 reqFTP.KeepAlive = true;
                 reqFTP.Method = WebRequestMethods.Ftp.UploadFile;
                 reqFTP.UseBinary = true;
@@ -34,7 +34,7 @@ namespace Travel_Admin_Panel.Controllers
                 bwObj.Flush();
                 bwObj.Close();
                 strm.Close();
-                FilePath = "https://travellinekashmir.com/Resources/uploadedimages/" + FolderName + "/" + FileName;
+                FilePath = "https://travelalong.in/Resources/uploadedimages/" + FolderName + "/" + FileName;
 
             }
             return FilePath;
@@ -57,9 +57,9 @@ namespace Travel_Admin_Panel.Controllers
             {
                 FileName = Guid.NewGuid() + ".jpg";
 
-                FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri("ftp://" + "travellinekashmir.com/Resources/uploadedimages/" + FolderName + "/" + FileName));
-                reqFTP.Credentials = new NetworkCredential("TMSS_fTP", "Tlk#fTp^123#");
-                reqFTP.KeepAlive = true;
+				FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri("ftp://" + "travelalong.in/Resources/uploadedimages/" + FolderName + "/" + FileName));
+				reqFTP.Credentials = new NetworkCredential("ftp_travelalong", "Trvl@l0ng@89#");
+				reqFTP.KeepAlive = true;
                 reqFTP.Method = WebRequestMethods.Ftp.UploadFile;
                 reqFTP.UseBinary = true;
                 byte[] data = getMediaBytes(file);
@@ -69,7 +69,7 @@ namespace Travel_Admin_Panel.Controllers
                 bwObj.Flush();
                 bwObj.Close();
                 strm.Close();
-                FilePath = "https://travellinekashmir.com/Resources/uploadedimages/" + FolderName + "/" + FileName;
+                FilePath = "https://travelalong.in/Resources/uploadedimages/" + FolderName + "/" + FileName;
                 ThumbnailPath = UploadThm(file, FolderName);
 
             }
@@ -193,9 +193,9 @@ namespace Travel_Admin_Panel.Controllers
         {
             String FileName = "Thm_" + Guid.NewGuid() + ".jpg";
 
-            FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri("ftp://" + "travellinekashmir.com/Resources/uploadedimages/" + Folder + "/Thumbnails/" + FileName));
-            reqFTP.Credentials = new NetworkCredential("TMSS_fTP", "Tlk#fTp^123#");
-            reqFTP.KeepAlive = true;
+            FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri("ftp://" + "travelalong.in/Resources/uploadedimages/" + Folder + "/Thumbnails/" + FileName));
+			reqFTP.Credentials = new NetworkCredential("ftp_travelalong", "Trvl@l0ng@89#");
+			reqFTP.KeepAlive = true;
             reqFTP.Method = WebRequestMethods.Ftp.UploadFile;
             reqFTP.UseBinary = true;
             Stream strm = reqFTP.GetRequestStream();
@@ -204,7 +204,7 @@ namespace Travel_Admin_Panel.Controllers
             bwObj.Flush();
             bwObj.Close();
             strm.Close();
-            String FilePath = "https://travellinekashmir.com/Resources/uploadedimages/" + Folder + "/Thumbnails/" + FileName;
+            String FilePath = "https://travelalong.in/Resources/uploadedimages/" + Folder + "/Thumbnails/" + FileName;
             return FilePath;
         }
         #endregion
