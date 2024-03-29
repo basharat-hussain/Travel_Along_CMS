@@ -11,9 +11,7 @@ namespace Travel_Admin_Panel.App_Code
         public string ConnectionString = "";
         public DBConnection()
         {
-			//ConnectionString = @"server=192.168.1.3; Database=TM_DB_Travel; User Id=sa; Password=Hussain@313#";
             ConnectionString = ConfigurationManager.ConnectionStrings["Connstring"].ConnectionString;
-           // @"server=wow.grabweb.in,2419; Database=TravelAlong_DB; User Id=travelalong_dbuser; Password=TravelAlong_DB#Usr1";
         }
         #region Execute SP Query DataTable
         //Executes a stored Procedure Query

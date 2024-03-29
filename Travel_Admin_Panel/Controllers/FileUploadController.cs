@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -14,16 +15,33 @@ namespace Travel_Admin_Panel.Controllers
     public class FileUploadController : Controller
     {
 
+        #region Init
+        private static NetworkCredential _credentials;
+        private static string _ftpRootPath;
+        private static string _webRootPath;
+        public FileUploadController()
+        {
+            var ftpUsername = ConfigurationManager.AppSettings["ftpUserName"];
+            var ftpPassword = ConfigurationManager.AppSettings["ftpPassword"];
+            _ftpRootPath = ConfigurationManager.AppSettings["ftpRootPath"];
+            _webRootPath = ConfigurationManager.AppSettings["webRootPath"];
+            _credentials = new NetworkCredential(ftpUsername, ftpPassword);
+        }
+
+        #endregion
+
+        #region Upload File
+
         public String UploadFile(HttpPostedFileBase file, String FolderName)
         {
             String FilePath = null;
             String FileName = null;
             if (file != null && file.ContentLength > 0)
             {
-                FileName = Guid.NewGuid() + ".jpg";
+                FileName = $"FL_{Guid.NewGuid()}.jpg";
 
-                FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri("ftp://" + "travelalong.in/Resources/uploadedimages/" + FolderName + "/" + FileName));
-                reqFTP.Credentials = new NetworkCredential("ftp_travelalong", "Trvl@l0ng@89#");
+                FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri($"{_ftpRootPath}/{FolderName}/{FileName}"));
+                reqFTP.Credentials = _credentials;
                 reqFTP.KeepAlive = true;
                 reqFTP.Method = WebRequestMethods.Ftp.UploadFile;
                 reqFTP.UseBinary = true;
@@ -34,13 +52,15 @@ namespace Travel_Admin_Panel.Controllers
                 bwObj.Flush();
                 bwObj.Close();
                 strm.Close();
-                FilePath = "https://travelalong.in/Resources/uploadedimages/" + FolderName + "/" + FileName;
+                FilePath = $"{_webRootPath}/{FolderName}/{FileName}";
 
             }
             return FilePath;
         }
 
-        #region UploadFile
+        #endregion 
+
+        #region UploadFileWith Thumb
         /// <summary>
         /// Upload a file using HTTPPostedFileBase
         /// </summary>
@@ -55,11 +75,11 @@ namespace Travel_Admin_Panel.Controllers
             String FileName = null;
             if (file != null && file.ContentLength > 0)
             {
-                FileName = Guid.NewGuid() + ".jpg";
+                FileName = $"FL_{Guid.NewGuid()}.jpg";
+                FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri($"{_ftpRootPath}/{FolderName}/{FileName}"));
+                reqFTP.Credentials = _credentials;
 
-				FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri("ftp://" + "travelalong.in/Resources/uploadedimages/" + FolderName + "/" + FileName));
-				reqFTP.Credentials = new NetworkCredential("ftp_travelalong", "Trvl@l0ng@89#");
-				reqFTP.KeepAlive = true;
+                reqFTP.KeepAlive = true;
                 reqFTP.Method = WebRequestMethods.Ftp.UploadFile;
                 reqFTP.UseBinary = true;
                 byte[] data = getMediaBytes(file);
@@ -69,7 +89,7 @@ namespace Travel_Admin_Panel.Controllers
                 bwObj.Flush();
                 bwObj.Close();
                 strm.Close();
-                FilePath = "https://travelalong.in/Resources/uploadedimages/" + FolderName + "/" + FileName;
+                FilePath = $"{_webRootPath}/{FolderName}/{FileName}";
                 ThumbnailPath = UploadThm(file, FolderName);
 
             }
@@ -77,6 +97,7 @@ namespace Travel_Admin_Panel.Controllers
             Paths[1] = ThumbnailPath;
             return Paths;
         }
+
         #endregion
 
         #region ConvertMediaBytes
@@ -97,8 +118,8 @@ namespace Travel_Admin_Panel.Controllers
         public void DeleteFile(String ImagePath)
         {
 
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + "travellinekashmir.com/Resources/" + ImagePath.Substring(ImagePath.IndexOf("uploadedimages")));
-            request.Credentials = new NetworkCredential("TMSS_fTP", "Tlk#fTp^123#");
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create($"{_ftpRootPath}/{ImagePath.Substring(ImagePath.IndexOf("Resources") + "Resources".Length + 1)}");
+            request.Credentials = _credentials;
             request.Method = WebRequestMethods.Ftp.DeleteFile;
             FtpWebResponse response = (FtpWebResponse)request.GetResponse();
 
@@ -114,8 +135,8 @@ namespace Travel_Admin_Panel.Controllers
         {
             for (int i = 0; i < ImagePaths.Length; i++)
             {
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + "travellinekashmir.com/Resources/" + ImagePaths[i].Substring(ImagePaths[i].IndexOf("uploadedimages")));
-                request.Credentials = new NetworkCredential("TMSS_fTP", "Tlk#fTp^123#");
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create($"{_ftpRootPath}/{ImagePaths[i].Substring(ImagePaths[i].IndexOf("Resources") + "Resources".Length + 1)}");
+                request.Credentials = _credentials;
                 request.Method = WebRequestMethods.Ftp.DeleteFile;
                 FtpWebResponse response = (FtpWebResponse)request.GetResponse();
             }
@@ -191,11 +212,11 @@ namespace Travel_Admin_Panel.Controllers
         #region UploadThumbnail
         public String UploadThumbnail(byte[] data, String Folder)
         {
-            String FileName = "Thm_" + Guid.NewGuid() + ".jpg";
+            var FileName = $"Thm_{Guid.NewGuid()}.jpg";
 
-            FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri("ftp://" + "travelalong.in/Resources/uploadedimages/" + Folder + "/Thumbnails/" + FileName));
-			reqFTP.Credentials = new NetworkCredential("ftp_travelalong", "Trvl@l0ng@89#");
-			reqFTP.KeepAlive = true;
+            FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri($"{_ftpRootPath}/{Folder}/{FileName}"));
+            reqFTP.Credentials = _credentials;
+            reqFTP.KeepAlive = true;
             reqFTP.Method = WebRequestMethods.Ftp.UploadFile;
             reqFTP.UseBinary = true;
             Stream strm = reqFTP.GetRequestStream();
@@ -204,7 +225,7 @@ namespace Travel_Admin_Panel.Controllers
             bwObj.Flush();
             bwObj.Close();
             strm.Close();
-            String FilePath = "https://travelalong.in/Resources/uploadedimages/" + Folder + "/Thumbnails/" + FileName;
+            var FilePath = $"{_webRootPath}/{Folder}/{FileName}";
             return FilePath;
         }
         #endregion
